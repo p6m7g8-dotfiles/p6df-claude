@@ -17,7 +17,8 @@
 
 ## Summary
 
-TODO: Add a short summary of this module.
+p6df module for Claude Code: aliases, prompt integration, profile switching,
+MCP server setup, and Anthropic API key management.
 
 ## Contributing
 
@@ -38,10 +39,15 @@ TODO: Add a short summary of this module.
 - `p6df::modules::claudecode::aliases::init()`
 - `p6df::modules::claudecode::deps()`
 - `p6df::modules::claudecode::external::brew()`
+- `p6df::modules::claudecode::init(_module, dir)`
+  - Args:
+    - _module
+    - dir
+- `p6df::modules::claudecode::mcp::env()`
 - `p6df::modules::claudecode::profile::off()`
 - `p6df::modules::claudecode::profile::on(profile, [token=])`
   - Args:
-    - profile - 
+    - profile
     - OPTIONAL token - []
 - `p6df::modules::claudecode::vscodes::config()`
 - `str str = p6df::modules::claudecode::prompt::mod()`
@@ -52,9 +58,10 @@ TODO: Add a short summary of this module.
 .
 ├── init.zsh
 ├── lib
-└── README.md
+├── README.md
+└── share
 
-2 directories, 2 files
+3 directories, 2 files
 ```
 
 ## Author

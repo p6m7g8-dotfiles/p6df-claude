@@ -31,6 +31,27 @@ EOF
 ######################################################################
 #<
 #
+# Function: p6df::modules::claudecode::init(_module, dir)
+#
+#  Args:
+#	_module -
+#	dir -
+#
+#  Environment:	 HOME
+#>
+######################################################################
+p6df::modules::claudecode::init() {
+  local _module="$1"
+  local dir="$2"
+
+  p6df::core::path::if "$HOME/.claude/bin"
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
 # Function: p6df::modules::claudecode::external::brew()
 #
 #>
@@ -145,6 +166,25 @@ p6df::modules::claudecode::profile::off() {
 
   p6_env_export_un P6_DFZ_PROFILE_CLAUDE
   p6_env_export_un CLAUDE_CODE_OAUTH_TOKEN
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::modules::claudecode::mcp::env()
+#
+#  Environment:	 ANTHROPIC_API_KEY CLAUDE_CODE_OAUTH_TOKEN
+#>
+######################################################################
+p6df::modules::claudecode::mcp::env() {
+
+  if p6_string_blank_NOT "$CLAUDE_CODE_OAUTH_TOKEN"; then
+    p6_env_export "ANTHROPIC_API_KEY" "$CLAUDE_CODE_OAUTH_TOKEN"
+  else
+    p6_env_export_un ANTHROPIC_API_KEY
+  fi
 
   p6_return_void
 }
