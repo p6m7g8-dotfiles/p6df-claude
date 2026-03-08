@@ -2,6 +2,8 @@ name: Build
 
 on:
   pull_request: {}
+  push: {}
+  merge_group: {}
   workflow_dispatch: {}
 
 jobs:

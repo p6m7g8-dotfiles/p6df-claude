@@ -17,8 +17,9 @@
 
 ## Summary
 
-p6df module for Claude Code: aliases, prompt integration, profile switching,
-MCP server setup, and Anthropic API key management.
+Integrates Claude Code (Anthropic CLI) into the p6df shell framework. Provides aliases,
+profile switching, and automatic derivation of `ANTHROPIC_API_KEY` from the OAuth token
+via `profile::on` / `profile::off`.
 
 ## Contributing
 
@@ -43,7 +44,6 @@ MCP server setup, and Anthropic API key management.
   - Args:
     - _module
     - dir
-- `p6df::modules::claudecode::mcp::env()`
 - `p6df::modules::claudecode::profile::off()`
 - `p6df::modules::claudecode::profile::on(profile, [token=])`
   - Args:

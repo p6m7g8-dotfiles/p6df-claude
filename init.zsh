@@ -138,7 +138,7 @@ p6df::modules::claudecode::prompt::mod() {
 #	profile -
 #	OPTIONAL token - []
 #
-#  Environment:	 CLAUDE_CODE_OAUTH_TOKEN P6_DFZ_PROFILE_CLAUDE
+#  Environment:	 ANTHROPIC_API_KEY CLAUDE_CODE_OAUTH_TOKEN P6_DFZ_PROFILE_CLAUDE
 #>
 ######################################################################
 p6df::modules::claudecode::profile::on() {
@@ -149,6 +149,11 @@ p6df::modules::claudecode::profile::on() {
 
   if p6_string_blank_NOT "$token"; then
     p6_env_export "CLAUDE_CODE_OAUTH_TOKEN" "$token"
+    p6_env_export "ANTHROPIC_API_KEY" "$token"
+  elif p6_string_blank_NOT "$CLAUDE_CODE_OAUTH_TOKEN"; then
+    p6_env_export "ANTHROPIC_API_KEY" "$CLAUDE_CODE_OAUTH_TOKEN"
+  else
+    p6_env_export_un ANTHROPIC_API_KEY
   fi
 
   p6_return_void
@@ -159,32 +164,14 @@ p6df::modules::claudecode::profile::on() {
 #
 # Function: p6df::modules::claudecode::profile::off()
 #
-#  Environment:	 CLAUDE_CODE_OAUTH_TOKEN P6_DFZ_PROFILE_CLAUDE
+#  Environment:	 ANTHROPIC_API_KEY CLAUDE_CODE_OAUTH_TOKEN P6_DFZ_PROFILE_CLAUDE
 #>
 ######################################################################
 p6df::modules::claudecode::profile::off() {
 
   p6_env_export_un P6_DFZ_PROFILE_CLAUDE
   p6_env_export_un CLAUDE_CODE_OAUTH_TOKEN
-
-  p6_return_void
-}
-
-######################################################################
-#<
-#
-# Function: p6df::modules::claudecode::mcp::env()
-#
-#  Environment:	 ANTHROPIC_API_KEY CLAUDE_CODE_OAUTH_TOKEN
-#>
-######################################################################
-p6df::modules::claudecode::mcp::env() {
-
-  if p6_string_blank_NOT "$CLAUDE_CODE_OAUTH_TOKEN"; then
-    p6_env_export "ANTHROPIC_API_KEY" "$CLAUDE_CODE_OAUTH_TOKEN"
-  else
-    p6_env_export_un ANTHROPIC_API_KEY
-  fi
+  p6_env_export_un ANTHROPIC_API_KEY
 
   p6_return_void
 }
