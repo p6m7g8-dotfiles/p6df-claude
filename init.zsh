@@ -78,30 +78,30 @@ p6df::modules::claudecode::external::brew() {
 p6df::modules::claudecode::aliases::init() {
 
   # core
-  alias cl='claude'
-  alias clh='claude --help'
-  alias clv='claude --version'
+  p6_alias "cl" "claude"
+  p6_alias "clh" "claude --help"
+  p6_alias "clv" "claude --version"
 
   # sessions
-  alias clsf='claude --resume --fork-session'
-  alias clsn='claude --no-session-persistence'
+  p6_alias "clsf" "claude --resume --fork-session"
+  p6_alias "clsn" "claude --no-session-persistence"
 
   # common workflows
-  alias clp='claude --print'
-  alias cli='claude --interactive'
-  alias clc='claude --continue'
-  alias clr='claude --resume'
+  p6_alias "clp" "claude --print"
+  p6_alias "cli" "claude --interactive"
+  p6_alias "clc" "claude --continue"
+  p6_alias "clr" "claude --resume"
 
   # debugging / verbosity
-  alias cld='CLAUDE_DEBUG=1 claude'
-  alias clvv='CLAUDE_DEBUG=1 CLAUDE_VERBOSE=1 claude'
+  p6_alias "cld" "CLAUDE_DEBUG=1 claude"
+  p6_alias "clvv" "CLAUDE_DEBUG=1 CLAUDE_VERBOSE=1 claude"
 
   # piping / unix-style usage
-  alias clx='xargs -I{} claude --print <<< "{}"'
-  alias clcat='claude --print <'
+  p6_alias "clx" 'xargs -I{} claude --print <<< "{}"'
+  p6_alias "clcat" "claude --print <"
 
   # config / env inspection
-  alias clenv='env | grep -i claude'
+  p6_alias "clenv" 'env | p6_filter_row_select_icase "claude"'
 
   p6_return_void
 }
