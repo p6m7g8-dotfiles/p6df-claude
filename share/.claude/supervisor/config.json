@@ -1,0 +1,27 @@
+{
+  "completion_token": "e7f3a912-8b4c-4d5e-9f1a-2c3b4d5e6f70",
+  "stall_timeout_seconds": 5,
+  "thinking_stall_timeout_seconds": 30,
+  "stop_attempt_max": 3,
+  "anti_drift_interval_turns": 20,
+  "anti_drift_max_chars": 600,
+  "disk_free_threshold_pct": 5,
+  "memory_pressure_threshold_pct": 90,
+  "rate_limits": {
+    "requests_per_minute": 60,
+    "tokens_per_minute": 100000
+  },
+  "spawn_budget_pct": 80,
+  "log_max_size_mb": 10,
+  "credential_cache_ttl_seconds": 3600,
+  "injection_cooldown_seconds": 30,
+  "lock_heartbeat_interval_seconds": 10,
+  "lock_expiry_seconds": 15,
+  "registry_ttl_seconds": 300,
+  "swarm_idle_timeout_seconds": 5,
+  "compaction_window_pct": 90,
+  "verifier_max_retries": 3,
+  "verifier_timeout_seconds": 10,
+  "watchdog_check_interval_seconds": 30,
+  "cron_interval_seconds": 60
+}

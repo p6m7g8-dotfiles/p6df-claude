@@ -1,0 +1,271 @@
+{
+  "model": "claude-sonnet-4-6",
+  "theme": "dark",
+  "skipDangerousModePermissionPrompt": true,
+  "autoUpdaterStatus": "enabled",
+  "includeCoAuthoredBy": true,
+  "preferredNotifChannel": "terminal_bell",
+  "cleanupPeriodDays": 30,
+  "env": {
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "DISABLE_TELEMETRY": "1",
+    "DISABLE_ERROR_REPORTING": "1",
+    "CLAUDE_COMPLETION_TOKEN": "e7f3a912-8b4c-4d5e-9f1a-2c3b4d5e6f70",
+    "CLAUDE_SUPERVISOR_DIR": "~/.claude/supervisor",
+    "CLAUDE_ENV_FILE": "~/.claude/supervisor/env-heal.sh"
+  },
+  "permissions": {
+    "deny": ["AskUserQuestion"],
+    "defaultMode": "default"
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/stop.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/subagent-stop.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/subagent-start.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "AskUserQuestion|EnterPlanMode",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/pre-tool-use.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/pre-tool-use.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/pre-tool-use.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/post-tool-use-agent.py",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/post-tool-use-lock-release.py",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/post-tool-use-heartbeat.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|Read|Glob|Grep",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/post-tool-use-heartbeat.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "WebFetch|Read|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/post-tool-use-injection-defense.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/post-tool-use-lock-release.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/user-prompt-submit.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash $HOME/.claude/hooks/session-start.sh",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash $HOME/.claude/hooks/session-end.sh",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "matcher": "rate_limit|billing_error|authentication_failed|max_output_tokens|server_error|invalid_request|unknown",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/stop-failure.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/post-compact.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/pre-compact.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "TeammateIdle": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/teammate-idle.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "TaskCompleted": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/task-completed.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "ConfigChange": [
+      {
+        "matcher": "user_settings|local_settings",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/config-change.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "InstructionsLoaded": [
+      {
+        "matcher": "session_start|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/hooks/instructions-loaded.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"$CLAUDE_NOTIFICATION\" with title \"Claude Code\"' 2>/dev/null || tput bel 2>/dev/null || true",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

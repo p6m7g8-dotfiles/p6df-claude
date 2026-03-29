@@ -33,14 +33,27 @@ p6df::modules::claude::external::brews() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::claude::home::symlink()
+# Function: p6df::modules::claude::home::symlinks()
 #
 #  Environment:	 HOME P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
 #>
 ######################################################################
-p6df::modules::claude::home::symlink() {
+p6df::modules::claude::home::symlinks() {
+  local src="$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-claude/share/.claude"
 
-  p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-claude/share/.claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+  # Core config
+  p6_file_symlink "$src/CLAUDE.md"       "$HOME/.claude/CLAUDE.md"
+  p6_file_symlink "$src/settings.json"   "$HOME/.claude/settings.json"
+
+  # Hooks directory
+  p6_file_symlink "$src/hooks"           "$HOME/.claude/hooks"
+
+  # Rules and agents
+  p6_file_symlink "$src/rules"           "$HOME/.claude/rules"
+  p6_file_symlink "$src/agents"          "$HOME/.claude/agents"
+
+  # Supervisor
+  p6_file_symlink "$src/supervisor"      "$HOME/.claude/supervisor"
 
   p6_return_void
 }

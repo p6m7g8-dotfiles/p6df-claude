@@ -1,0 +1,20 @@
+{
+  "_comment": "Patterns for AK prompt-injection defense. At least 2 must match in the same tool output to trigger a warning.",
+  "patterns": [
+    "ignore (previous|all|your) instructions",
+    "disregard (previous|all|your) instructions",
+    "forget (everything|your|all) (you|instructions|above)",
+    "new (instructions|directive|task|priority):",
+    "system (prompt|override|update):",
+    "you are now",
+    "your new (role|purpose|goal|instructions)",
+    "stop (what|whatever) you('re| are) doing",
+    "do not (continue|proceed|execute)",
+    "halt (execution|immediately|all)",
+    "emergency (stop|halt|abort)",
+    "override: ",
+    "\\[INST\\]",
+    "<\\|im_start\\|>",
+    "###SYSTEM###"
+  ]
+}
