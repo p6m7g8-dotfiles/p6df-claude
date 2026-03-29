@@ -16,6 +16,11 @@ jobs:
     permissions:
       pull-requests: write
     steps:
+      # GitHub blocks self-approval: a token cannot approve a PR opened by
+      # the same identity that owns it. When the PR author is p6m7g8-automation
+      # (the bot that owns P6_A_GH_TOKEN), use GITHUB_TOKEN (Actions actor)
+      # to avoid the "cannot approve your own pull request" error.
+      # Add additional bot logins to the condition as needed.
       - name: Auto-Approve PR (via GITHUB_TOKEN when bot is author)
         if: |
           github.event.pull_request.user.login == 'p6m7g8-automation' &&
