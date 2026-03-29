@@ -16,7 +16,18 @@ jobs:
     permissions:
       pull-requests: write
     steps:
+      - name: Auto-Approve PR (via GITHUB_TOKEN when bot is author)
+        if: |
+          github.event.pull_request.user.login == 'p6m7g8-automation' &&
+          !github.event.pull_request.draft &&
+          !contains(github.event.pull_request.labels.*.name, 'do-not-merge') &&
+          contains(github.event.pull_request.labels.*.name, 'auto-approve')
+        uses: hmarr/auto-approve-action@v4.0.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Auto-Approve PR
+        if: github.event.pull_request.user.login != 'p6m7g8-automation'
         uses: p6m7g8-actions/p6-gh-pr-auto-approve@main
         with:
           bot_token: ${{ secrets.P6_A_GH_TOKEN }}
