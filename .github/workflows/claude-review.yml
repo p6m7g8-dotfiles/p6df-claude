@@ -2,6 +2,9 @@ name: Claude Code Review
 on:
   pull_request:
     types: [opened, ready_for_review, synchronize]
+  push:
+    branches:
+      - gh-readonly-queue/**
   merge_group: {}
 
 permissions:
@@ -13,11 +16,11 @@ jobs:
   claude-review:
     runs-on: ubuntu-latest
     steps:
-      - name: Skip on merge queue
-        if: github.event_name == 'merge_group'
-        run: echo "Skipping review in merge queue context"
+      - name: Skip on queue refs
+        if: github.event_name == 'merge_group' || github.event_name == 'push'
+        run: echo "Skipping review in queue context"
       - name: Run claude review
-        if: github.event_name != 'merge_group' && github.event.pull_request.draft == false
+        if: github.event_name == 'pull_request' && github.event.pull_request.draft == false
         continue-on-error: true
         uses: p6m7g8-actions/claude@main
         with:
