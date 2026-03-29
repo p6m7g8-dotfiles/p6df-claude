@@ -21,11 +21,11 @@ p6df::modules::claude::deps() {
 ######################################################################
 p6df::modules::claude::external::brews() {
 
-  p6df::modules::homebrew::cli::brew::install --cask claude-code
-  p6df::modules::homebrew::cli::brew::install --cask claude
-  p6df::modules::homebrew::cli::brew::install claude-cmd
-  p6df::modules::homebrew::cli::brew::install claude-code-templates
-  p6df::modules::homebrew::cli::brew::install claude-hooks
+  p6df::core::homebrew::cli::brew::install --cask claude-code
+  p6df::core::homebrew::cli::brew::install --cask claude
+  p6df::core::homebrew::cli::brew::install claude-cmd
+  p6df::core::homebrew::cli::brew::install claude-code-templates
+  p6df::core::homebrew::cli::brew::install claude-hooks
 
   p6_return_void
 }
@@ -115,7 +115,7 @@ p6df::modules::claude::profile::off() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::claude::code::init(_module, dir)
+# Function: p6df::modules::claude::init(_module, dir)
 #
 #  Args:
 #	_module -
@@ -136,7 +136,7 @@ p6df::modules::claude::init() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::claude::code::vscodes::config()
+# Function: p6df::modules::claude::vscodes::config()
 #
 #>
 ######################################################################
@@ -152,7 +152,7 @@ EOF
 ######################################################################
 #<
 #
-# Function: p6df::modules::claude::code::aliases::init()
+# Function: p6df::modules::claude::aliases::init()
 #
 #>
 ######################################################################
@@ -168,10 +168,10 @@ p6df::modules::claude::aliases::init() {
   p6_alias "clsn" "claude --no-session-persistence"
 
   # common workflows
-  p6_alias "clp" "claude --print"
-  p6_alias "cli" "claude --interactive"
-  p6_alias "clc" "claude --continue"
-  p6_alias "clr" "claude --resume"
+  p6_alias "clp"  "claude --print"
+  p6_alias "clii" "claude --interactive"
+  p6_alias "clc"  "claude --continue"
+  p6_alias "clr"  "claude --resume"
 
   # debugging / verbosity
   p6_alias "cld" "CLAUDE_DEBUG=1 claude"
@@ -179,7 +179,7 @@ p6df::modules::claude::aliases::init() {
 
   # piping / unix-style usage
   p6_alias "clx" 'xargs -I{} claude --print <<< "{}"'
-  p6_alias "clcat" "claude --print <"
+  p6_alias "clcat" "claude --print"
 
   # config / env inspection
   p6_alias "clenv" 'env | p6_filter_row_select_icase "claude"'
