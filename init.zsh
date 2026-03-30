@@ -66,7 +66,7 @@ p6df::modules::claude::home::symlinks() {
 #  Returns:
 #	str - str
 #
-#  Environment:	 CLAUDE_CODE_OAUTH_TOKEN P6_DFZ_PROFILE_CLAUDE
+#  Environment:	 CLAUDE_CODE_OAUTH_TOKEN CLAUDE_CONFIG_DIR P6_DFZ_PROFILE_CLAUDE
 #>
 ######################################################################
 p6df::modules::claude::prompt::mod() {
@@ -76,6 +76,9 @@ p6df::modules::claude::prompt::mod() {
     str="claude:\t\t  $P6_DFZ_PROFILE_CLAUDE:"
     if p6_string_blank_NOT "$CLAUDE_CODE_OAUTH_TOKEN"; then
       str=$(p6_string_append "$str" "oauth" " ")
+    fi
+    if p6_string_blank_NOT "$CLAUDE_CONFIG_DIR"; then
+      str=$(p6_string_append "$str" "[$CLAUDE_CONFIG_DIR]" " ")
     fi
   fi
 
