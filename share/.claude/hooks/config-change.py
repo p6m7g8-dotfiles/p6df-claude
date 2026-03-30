@@ -28,8 +28,8 @@ try:
 except Exception:
     sys.exit(0)
 
-config_source = data.get("config_source", "")
-new_config = data.get("new_config", {})
+config_source = data.get("config_source") or data.get("change_type", "")
+new_config = data.get("new_config") or data.get("new_value", {})
 
 # Only enforce on user and local settings (policy_settings cannot be blocked)
 if config_source not in ("user_settings", "local_settings"):

@@ -79,16 +79,11 @@ if token and token_on_own_line(msg, token):
     reset_attempt_count(session_id)
     sys.exit(0)
 
-# Safety valve: if already looping, check attempt counter
+# Safety valve: if already looping, allow immediately
 if active:
-    count = get_attempt_count(session_id)
-    count += 1
-    set_attempt_count(session_id, count)
-    if count >= max_attempts:
-        # Allow through after max consecutive blocks to prevent infinite loop
-        log_intervention("stop_allowed_max_attempts", session_id, f"count={count}")
-        reset_attempt_count(session_id)
-        sys.exit(0)
+    log_intervention("stop_allowed_active", session_id)
+    reset_attempt_count(session_id)
+    sys.exit(0)
 
 # Block — task not complete
 log_intervention("stop_blocked", session_id, f"active={active} msg_len={len(msg)}")
