@@ -1,1 +1,37 @@
-share/
+# Runtime / ephemeral — never commit these
+share/.claude/projects/
+share/.claude/todos/
+share/.claude/.credentials.json
+share/.claude/statsig/
+
+# Supervisor runtime state
+share/.claude/supervisor/active-session.json
+share/.claude/supervisor/swarm-registry.json
+share/.claude/supervisor/swarm-registry.lock
+share/.claude/supervisor/swarm-locks.json
+share/.claude/supervisor/task-anchor.txt
+share/.claude/supervisor/task-state.jsonl
+share/.claude/supervisor/resource-state.json
+share/.claude/supervisor/audit-last-run
+share/.claude/supervisor/spawn-blocked
+share/.claude/supervisor/billing-blocked
+share/.claude/supervisor/cred-refresh-needed
+share/.claude/supervisor/pending-inject
+share/.claude/supervisor/stop-attempts/
+share/.claude/supervisor/heartbeats/
+share/.claude/supervisor/messages/
+share/.claude/supervisor/logs/
+share/.claude/supervisor/audits/
+share/.claude/supervisor/api-key-cache
+share/.claude/supervisor/*.tmp
+
+# Tracked intentionally:
+# share/.claude/settings.json
+# share/.claude/CLAUDE.md
+# share/.claude/hooks/
+# share/.claude/rules/
+# share/.claude/agents/
+# share/.claude/supervisor/*.py
+# share/.claude/supervisor/*.sh
+# share/.claude/supervisor/*.json  (config.json, managed-settings.json, injection-patterns.json)
+# share/.claude/supervisor/*.plist.tmpl
