@@ -42,7 +42,7 @@ p6df::modules::claude::external::brews() {
 ######################################################################
 p6df::modules::claude::profile::mod() {
 
-  p6_return_words 'claude' "$ANTHROPIC_API_KEY" "$ANTHROPIC_AUTH_TOKEN" "$ANTHROPIC_MODEL" "$ANTHROPIC_BASE_URL"
+  p6_return_words 'claude' '$ANTHROPIC_API_KEY' '$ANTHROPIC_AUTH_TOKEN' '$ANTHROPIC_MODEL' '$ANTHROPIC_BASE_URL'
 }
 
 ######################################################################
