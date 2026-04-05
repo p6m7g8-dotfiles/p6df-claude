@@ -15,7 +15,11 @@ p6df::modules::claude::deps() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::claude::env::init()
+# Function: p6df::modules::claude::env::init(_module, _dir)
+#
+#  Args:
+#	_module -
+#	_dir -
 #
 #  Environment:	 DISABLE_ERROR_REPORTING DISABLE_TELEMETRY
 #>
@@ -60,7 +64,11 @@ p6df::modules::claude::env::init() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::claude::path::init()
+# Function: p6df::modules::claude::path::init(_module, _dir)
+#
+#  Args:
+#	_module -
+#	_dir -
 #
 #  Environment:	 HOME
 #>
@@ -77,7 +85,11 @@ p6df::modules::claude::path::init() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::claude::aliases::init()
+# Function: p6df::modules::claude::aliases::init(_module, _dir)
+#
+#  Args:
+#	_module -
+#	_dir -
 #
 #>
 ######################################################################
@@ -143,7 +155,6 @@ p6df::modules::claude::external::brews() {
 #
 # Function: p6df::modules::claude::langs()
 #
-#  Environment:	 P6_DFZ_CLAUDE_SANDBOX_NAME
 #>
 ######################################################################
 p6df::modules::claude::langs() {
@@ -178,6 +189,7 @@ EOF
 #  Returns:
 #	words - claude
 #
+#  Environment:	 ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN ANTHROPIC_BASE_URL ANTHROPIC_MODEL
 #>
 ######################################################################
 p6df::modules::claude::profile::mod() {

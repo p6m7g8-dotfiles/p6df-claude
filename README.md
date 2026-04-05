@@ -1,4 +1,4 @@
-# P6's POSIX.2: p6df-claudecode
+# P6's POSIX.2: p6df-claude
 
 ## Table of Contents
 
@@ -7,6 +7,7 @@
 - [Contributing](#contributing)
 - [Code of Conduct](#code-of-conduct)
 - [Usage](#usage)
+  - [Aliases](#aliases)
   - [Functions](#functions)
 - [Hierarchy](#hierarchy)
 - [Author](#author)
@@ -17,9 +18,7 @@
 
 ## Summary
 
-Integrates Claude Code (Anthropic CLI) into the p6df shell framework. Provides aliases,
-profile switching, and automatic derivation of `ANTHROPIC_API_KEY` from the OAuth token
-via `profile::on` / `profile::off`.
+TODO: Add a short summary of this module.
 
 ## Contributing
 
@@ -31,26 +30,74 @@ via `profile::on` / `profile::off`.
 
 ## Usage
 
+### Aliases
+
+- `cl` -> `claude`
+- `clacl` -> `p6df::modules::claude::sandbox::select arkestro; p6df::modules::claude::sandbox::runner`
+- `clcat` -> `claude --print`
+- `cld` -> `CLAUDE_DEBUG=1 claude`
+- `clenv` -> `env | p6_filter_row_select_icase `
+- `clh` -> `claude --help`
+- `clii` -> `claude --interactive`
+- `clp6cl` -> `p6df::modules::claude::sandbox::select p6;      p6df::modules::claude::sandbox::runner`
+- `clsf` -> `claude --resume --fork-session`
+- `clsn` -> `claude --no-session-persistence`
+- `clv` -> `claude --version`
+- `clvv` -> `CLAUDE_DEBUG=1 CLAUDE_VERBOSE=1 claude`
+- `clx` -> `xargs -I{} claude --print <<< `
+- `p6_claude` -> `p6df::modules::claude::sandbox::runner`
+
 ### Functions
 
-#### p6df-claudecode
+#### p6df-claude
 
-##### p6df-claudecode/init.zsh
+##### p6df-claude/init.zsh
 
-- `p6df::modules::claudecode::aliases::init()`
-- `p6df::modules::claudecode::deps()`
-- `p6df::modules::claudecode::external::brew()`
-- `p6df::modules::claudecode::init(_module, dir)`
+- `p6df::modules::claude::aliases::init(_module, _dir)`
   - Args:
     - _module
-    - dir
-- `p6df::modules::claudecode::profile::off()`
-- `p6df::modules::claudecode::profile::on(profile, [token=])`
+    - _dir
+- `p6df::modules::claude::deps()`
+- `p6df::modules::claude::env::init(_module, _dir)`
   - Args:
-    - profile
-    - OPTIONAL token - []
-- `p6df::modules::claudecode::vscodes::config()`
-- `str str = p6df::modules::claudecode::prompt::mod()`
+    - _module
+    - _dir
+- `p6df::modules::claude::external::brews()`
+- `p6df::modules::claude::langs()`
+- `p6df::modules::claude::path::init(_module, _dir)`
+  - Args:
+    - _module
+    - _dir
+- `p6df::modules::claude::vscodes::config()`
+- `words claude = p6df::modules::claude::profile::mod()`
+
+#### p6df-claude/lib
+
+##### p6df-claude/lib/sandbox.sh
+
+- `p6df::modules::claude::sandbox::runner(...)`
+  - Args:
+    - ...
+- `p6df::modules::claude::sandbox::select(sandbox_name)`
+  - Args:
+    - sandbox_name
+- `path dir = p6df::modules::claude::sandbox::config_dir([sandbox_name=$P6_DFZ_CLAUDE_SANDBOX_NAME])`
+  - Args:
+    - OPTIONAL sandbox_name - [$P6_DFZ_CLAUDE_SANDBOX_NAME]
+- `path dir = p6df::modules::claude::sandbox::dir([sandbox_name=$P6_DFZ_CLAUDE_SANDBOX_NAME])`
+  - Args:
+    - OPTIONAL sandbox_name - [$P6_DFZ_CLAUDE_SANDBOX_NAME]
+- `path settings_file = p6df::modules::claude::sandbox::settings_file([sandbox_name=$P6_DFZ_CLAUDE_SANDBOX_NAME])`
+  - Args:
+    - OPTIONAL sandbox_name - [$P6_DFZ_CLAUDE_SANDBOX_NAME]
+- `str dir = p6df::modules::claude::sandbox::create(sandbox_name, ...)`
+  - Args:
+    - sandbox_name
+    - ...
+
+##### p6df-claude/lib/sandboxes.sh
+
+- `p6df::modules::claude::sandboxes::init()`
 
 ## Hierarchy
 
@@ -58,10 +105,12 @@ via `profile::on` / `profile::off`.
 .
 ├── init.zsh
 ├── lib
+│   ├── sandbox.sh
+│   └── sandboxes.sh
 ├── README.md
 └── share
 
-3 directories, 2 files
+3 directories, 4 files
 ```
 
 ## Author
