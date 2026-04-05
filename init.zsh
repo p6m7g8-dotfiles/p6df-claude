@@ -1,11 +1,24 @@
 # shellcheck shell=bash
 ######################################################################
+#<
+#
+# Function: p6df::modules::claude::deps()
+#
+#>
+######################################################################
 p6df::modules::claude::deps() {
   ModuleDeps=(
     p6m7g8-dotfiles/p6df-anthropic
   )
 }
 
+######################################################################
+#<
+#
+# Function: p6df::modules::claude::env::init()
+#
+#  Environment:	 DISABLE_ERROR_REPORTING DISABLE_TELEMETRY
+#>
 ######################################################################
 p6df::modules::claude::env::init() {
   local _module="$1"
@@ -45,6 +58,13 @@ p6df::modules::claude::env::init() {
 }
 
 ######################################################################
+#<
+#
+# Function: p6df::modules::claude::path::init()
+#
+#  Environment:	 HOME
+#>
+######################################################################
 p6df::modules::claude::path::init() {
   local _module="$1"
   local _dir="$2"
@@ -54,6 +74,12 @@ p6df::modules::claude::path::init() {
   p6_return_void
 }
 
+######################################################################
+#<
+#
+# Function: p6df::modules::claude::aliases::init()
+#
+#>
 ######################################################################
 p6df::modules::claude::aliases::init() {
   local _module="$1"
@@ -95,6 +121,12 @@ p6df::modules::claude::aliases::init() {
   p6_return_void
 }
 ######################################################################
+#<
+#
+# Function: p6df::modules::claude::external::brews()
+#
+#>
+######################################################################
 p6df::modules::claude::external::brews() {
 
   p6df::core::homebrew::cli::brew::install --cask claude-code
@@ -107,6 +139,13 @@ p6df::modules::claude::external::brews() {
 }
 
 ######################################################################
+#<
+#
+# Function: p6df::modules::claude::langs()
+#
+#  Environment:	 P6_DFZ_CLAUDE_SANDBOX_NAME
+#>
+######################################################################
 p6df::modules::claude::langs() {
 
   p6df::modules::claude::sandbox::create arkestro
@@ -115,6 +154,12 @@ p6df::modules::claude::langs() {
   p6_return_void
 }
 
+######################################################################
+#<
+#
+# Function: p6df::modules::claude::vscodes::config()
+#
+#>
 ######################################################################
 p6df::modules::claude::vscodes::config() {
 
@@ -126,24 +171,6 @@ EOF
 }
 
 ######################################################################
-p6df::modules::claude::profile::mod() {
-
-  p6_return_words 'claude' '$ANTHROPIC_API_KEY' '$ANTHROPIC_AUTH_TOKEN' '$ANTHROPIC_MODEL' '$ANTHROPIC_BASE_URL'
-}
-
-######################################################################
-#<
-#
-# Function: p6df::modules::claude::deps()
-#
-#>
-######################################################################
-#<
-#
-# Function: p6df::modules::claude::external::brews()
-#
-#>
-######################################################################
 #<
 #
 # Function: words claude = p6df::modules::claude::profile::mod()
@@ -153,35 +180,8 @@ p6df::modules::claude::profile::mod() {
 #
 #>
 ######################################################################
-#<
-#
-# Function: p6df::modules::claude::langs()
-#
-#  Environment:	 P6_DFZ_CLAUDE_SANDBOX_NAME
-#>
-######################################################################
-#<
-#
-# Function: p6df::modules::claude::path::init()
-#
-#  Environment:	 HOME
-#>
-######################################################################
-#<
-#
-# Function: p6df::modules::claude::vscodes::config()
-#
-#>
-######################################################################
-#<
-#
-# Function: p6df::modules::claude::env::init()
-#
-#  Environment:	 DISABLE_ERROR_REPORTING DISABLE_TELEMETRY
-#>
-######################################################################
-#<
-#
-# Function: p6df::modules::claude::aliases::init()
-#
-#>
+p6df::modules::claude::profile::mod() {
+
+  p6_return_words 'claude' '$ANTHROPIC_API_KEY' '$ANTHROPIC_AUTH_TOKEN' '$ANTHROPIC_MODEL' '$ANTHROPIC_BASE_URL'
+}
+
